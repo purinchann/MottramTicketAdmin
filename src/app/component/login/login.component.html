@@ -1,0 +1,18 @@
+<table mat-table class="table">
+  <tr mat-header-row><h2>ログイン</h2></tr>
+  <tr mat-row>
+    <mat-form-field appearance="outline" class="row" [formGroup]="loginForm">
+      <mat-label>メールアドレス</mat-label>
+      <input matInput type="email" class="input" formControlName="email" required>
+    </mat-form-field>
+  </tr>
+  <tr mat-row>
+    <mat-form-field appearance="outline" class="row" [formGroup]="loginForm">
+      <mat-label>パスワード</mat-label>
+      <input matInput type="password" class="input" formControlName="password" required>
+    </mat-form-field>
+  </tr>
+  <tr mat-row>
+    <button mat-raised-button color="primary" class="row" (click)="login()">ログイン</button>
+  </tr>
+</table>

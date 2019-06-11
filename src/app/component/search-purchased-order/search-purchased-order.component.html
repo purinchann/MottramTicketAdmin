@@ -1,0 +1,41 @@
+<div>
+  <h3>購入を担当したユーザのIDで注文検索</h3>
+  <mat-drawer-container class="example-container">
+      <mat-drawer mode="side" opened>
+        <table>
+            <tr><span class="menu-button"></span></tr>
+            <tr><span class="menu-button"><a routerLink="/dashboard"><button mat-flat-button color="basic">ダッシュボード</button></a></span></tr>
+            <tr><span class="menu-button"><a routerLink="/send-custom-message"><button mat-flat-button color="basic">メッセージ送信</button></a></span></tr>
+            <tr><span class="menu-button"><a routerLink="/update-wait-time"><button mat-flat-button color="basic">待ち時間更新</button></a></span></tr>
+            <tr><span class="menu-button"><a routerLink="/search-purchased-order"><button mat-flat-button color="basic">担当したユーザIDで注文検索</button></a></span></tr>
+        </table>
+      </mat-drawer>
+      <mat-drawer-content>
+        <div>
+            <mat-form-field appearance="outline" class="row" [formGroup]="searchForm">
+                <mat-label>購入を担当したユーザのIDで検索</mat-label>
+                <input matInput class="input" formControlName="buyer_id" required>
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)='searchOrderList()'>検索</button>
+        </div>
+        <table class="table">
+            <thead class="thead">
+                <tr>
+                  <th class="th">商品名</th>
+                  <th class="th">サイズ</th>
+                  <th class="th">価格</th>
+                  <th class="th">注文時刻</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let order of orders; let i = index">
+                    <td [ngClass]="{lightGray: i % 2 == 0}" class="td">{{ order.order_name }}</td>
+                    <td [ngClass]="{lightGray: i % 2 == 0}" class="td">{{ order.size }}サイズ</td>
+                    <td [ngClass]="{lightGray: i % 2 == 0}" class="td">¥{{ order.price }}</td>
+                    <td [ngClass]="{lightGray: i % 2 == 0}" class="td">{{ convertDateFormat(order.updated_at) }}</td>
+                </tr>
+            </tbody>
+        </table>
+      </mat-drawer-content>
+  </mat-drawer-container>
+</div>

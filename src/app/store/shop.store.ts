@@ -12,14 +12,6 @@ export class ShopDataStore {
     private api: ApiService
   ) {}
 
-  findAll(): Observable<Shop[]> {
-    return this.api.afs.collection<Shop>(ShopDataStore.PATH).valueChanges()
-  }
-
-  findById(id: string): Observable<Shop> {
-    return this.api.afs.doc<Shop>(ShopDataStore.PATH+`/${id}`).valueChanges()
-  }
-
   update(id: string, params: {[key: string]: any}) {
     this.api.afs.doc(ShopDataStore.PATH+`/${id}`).update(params);
   }

@@ -1,0 +1,45 @@
+<div>
+  <h3>メッセージ送信画面</h3>
+  <mat-drawer-container class="example-container">
+      <mat-drawer mode="side" opened>
+        <table>
+            <tr><span class="menu-button"></span></tr>
+            <tr><span class="menu-button"><a routerLink="/dashboard"><button mat-flat-button color="basic">ダッシュボード</button></a></span></tr>
+            <tr><span class="menu-button"><a routerLink="/send-custom-message"><button mat-flat-button color="basic">メッセージ送信</button></a></span></tr>
+            <tr><span class="menu-button"><a routerLink="/update-wait-time"><button mat-flat-button color="basic">待ち時間更新</button></a></span></tr>
+            <tr><span class="menu-button"><a routerLink="/search-purchased-order"><button mat-flat-button color="basic">担当したユーザIDで注文検索</button></a></span></tr>
+        </table>
+      </mat-drawer>
+      <mat-drawer-content>
+          <table mat-table class="table">
+              <tr mat-row>
+                  <th>メッセージを送る対象のユーザID</th>
+                  <td>
+                      <mat-form-field class="row" [formGroup]="messageForm">
+                        <input matInput class="input" formControlName="user_id" required tabindex="1">          
+                      </mat-form-field>          
+                  </td>
+              </tr>    
+              <tr mat-row>
+                  <th>件名</th>
+                  <td>
+                      <mat-form-field class="row" [formGroup]="messageForm">
+                        <input matInput class="input" formControlName="subject" required tabindex="1">          
+                      </mat-form-field>          
+                  </td>
+              </tr> 
+              <tr mat-row>
+                  <th>本文</th>
+                  <td>
+                      <mat-form-field class="row" [formGroup]="messageForm">
+                        <input matInput class="input" formControlName="text" required tabindex="1">          
+                      </mat-form-field>          
+                  </td>
+              </tr> 
+          </table>
+          <div>
+              <button mat-raised-button color="primary" class="save_button" (click)="sendMessage()">送信する</button>
+          </div>
+      </mat-drawer-content>
+  </mat-drawer-container>
+</div>

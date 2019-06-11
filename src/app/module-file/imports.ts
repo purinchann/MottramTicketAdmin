@@ -18,6 +18,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatTabsModule} from '@angular/material/tabs';
 
 export const imports = [
     BrowserModule,
@@ -37,5 +38,6 @@ export const imports = [
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatTabsModule,
     AppRoutingModule
 ]

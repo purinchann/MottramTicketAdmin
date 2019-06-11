@@ -1,3 +1,115 @@
-<p>
-  dashboard works!
-</p>
+<div>
+  <h3>注文一覧</h3>
+  <mat-drawer-container class="example-container">
+      <mat-drawer mode="side" opened>
+          <table>
+              <tr><span class="menu-button"></span></tr>
+              <tr><span class="menu-button"><a routerLink="/dashboard"><button mat-flat-button color="basic">ダッシュボード</button></a></span></tr>
+              <tr><span class="menu-button"><a routerLink="/send-custom-message"><button mat-flat-button color="basic">メッセージ送信</button></a></span></tr>
+              <tr><span class="menu-button"><a routerLink="/update-wait-time"><button mat-flat-button color="basic">待ち時間更新</button></a></span></tr>
+              <tr><span class="menu-button"><a routerLink="/search-purchased-order"><button mat-flat-button color="basic">担当したユーザIDで注文検索</button></a></span></tr>
+          </table>
+      </mat-drawer>
+      <mat-drawer-content>
+          <mat-tab-group mat-align-tabs="center" animationDuration="1200ms" [dynamicHeight]=true color="primary">
+
+              <mat-tab label="未支払い">
+                <table class="table">
+                    <thead class="thead">
+                        <tr>
+                          <th class="th">商品名</th>
+                          <th class="th">サイズ</th>
+                          <th class="th">価格</th>
+                          <th class="th">UserID</th>
+                          <th class="th">注文時刻</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let order of noPaidOrderList; let i = index">
+                            <td [ngClass]="{lightGray: i % 2 == 0}" class="td">{{ order.order_name }}</td>
+                            <td [ngClass]="{lightGray: i % 2 == 0}" class="td">{{ order.size }}サイズ</td>
+                            <td [ngClass]="{lightGray: i % 2 == 0}" class="td">¥{{ order.price }}</td>
+                            <td [ngClass]="{lightGray: i % 2 == 0}" class="td">{{ order.user_id }}</td>
+                            <td [ngClass]="{lightGray: i % 2 == 0}" class="td">{{ convertDateFormat(order.updated_at) }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+              </mat-tab>
+      
+              <mat-tab label="並び中">
+                  <table class="table">
+                      <thead class="thead">
+                          <tr>
+                            <th class="th">商品名</th>
+                            <th class="th">サイズ</th>
+                            <th class="th">価格</th>
+                            <th class="th">UserID</th>
+                            <th class="th">注文時刻</th>
+                            <th></th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let order of makingOrderList">
+                            <td [ngClass]="{lightGray: i % 2 == 0}" class="td">{{ order.order_name }}</td>
+                            <td [ngClass]="{lightGray: i % 2 == 0}" class="td">{{ order.size }}サイズ</td>
+                            <td [ngClass]="{lightGray: i % 2 == 0}" class="td">¥{{ order.price }}</td>
+                            <td [ngClass]="{lightGray: i % 2 == 0}" class="td">{{ order.user_id }}</td>
+                            <td [ngClass]="{lightGray: i % 2 == 0}" class="td">{{ convertDateFormat(order.updated_at) }}</td>
+                            <td>
+                              <button mat-raised-button color="primary" (click)='sendTenMinutesAgoMessage(order.user_id)'>10分前通知送信</button>
+                            </td>
+                          </tr>
+                      </tbody>
+                    </table>
+              </mat-tab>
+      
+              <mat-tab label="受け取り待ち">
+                  <table class="table">
+                      <thead class="thead">
+                          <tr>
+                            <th class="th">商品名</th>
+                            <th class="th">サイズ</th>
+                            <th class="th">価格</th>
+                            <th class="th">UserID</th>
+                            <th class="th">注文時刻</th>
+                            <th></th>
+                          </tr>
+                      </thead>
+                      <tr *ngFor="let order of waitDeliveryOrderList">
+                          <td [ngClass]="{lightGray: i % 2 == 0}" class="td">{{ order.order_name }}</td>
+                            <td [ngClass]="{lightGray: i % 2 == 0}" class="td">{{ order.size }}サイズ</td>
+                            <td [ngClass]="{lightGray: i % 2 == 0}" class="td">¥{{ order.price }}</td>
+                            <td [ngClass]="{lightGray: i % 2 == 0}" class="td">{{ order.user_id }}</td>
+                            <td [ngClass]="{lightGray: i % 2 == 0}" class="td">{{ convertDateFormat(order.updated_at) }}</td>
+                            <td>
+                              <button mat-raised-button color="primary" (click)='sendReceiptReminderMessage(order.user_id)'>受け取り催促通知送信</button>
+                            </td>
+                      </tr>
+                    </table>
+              </mat-tab>
+      
+              <mat-tab label="完了した注文">
+                  <table class="table">
+                      <thead class="thead">
+                          <tr>
+                            <th class="th">商品名</th>
+                            <th class="th">サイズ</th>
+                            <th class="th">価格</th>
+                            <th class="th">UserID</th>
+                            <th class="th">注文時刻</th>
+                          </tr>
+                      </thead>
+                      <tr *ngFor="let order of waitDeliveryOrderList">
+                          <td [ngClass]="{lightGray: i % 2 == 0}" class="td">{{ order.order_name }}</td>
+                            <td [ngClass]="{lightGray: i % 2 == 0}" class="td">{{ order.size }}サイズ</td>
+                            <td [ngClass]="{lightGray: i % 2 == 0}" class="td">¥{{ order.price }}</td>
+                            <td [ngClass]="{lightGray: i % 2 == 0}" class="td">{{ order.user_id }}</td>
+                            <td [ngClass]="{lightGray: i % 2 == 0}" class="td">{{ convertDateFormat(order.updated_at) }}</td>
+                      </tr>
+                    </table>
+              </mat-tab>
+      
+          </mat-tab-group>
+      </mat-drawer-content>
+  </mat-drawer-container>
+</div>

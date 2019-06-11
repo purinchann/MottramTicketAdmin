@@ -28,15 +28,11 @@ export class OrderDataStore {
     })
   }
 
-  whereByUserId(uid: string): Observable<Order[]> {
-    return this.api.afs.collection<Order>(OrderDataStore.PATH, ref => ref.where('user_id', '==', uid)).valueChanges()
+  whereByBuyerId(buyerId: string): Observable<Order[]> {
+    return this.api.afs.collection<Order>(OrderDataStore.PATH, ref => ref.where('buyerId', '==', buyerId)).valueChanges()
   }
 
-  update(id: string, params: {[key: string]: any}): Promise<boolean> {
-    return this.api.afs.doc(OrderDataStore.PATH+`/${id}`).update(params).then(() => {
-        return true
-    }).catch(err => {
-        return false
-    })
+  whereByToday(todayStr: string): Observable<Order[]> {
+    return this.api.afs.collection<Order>(OrderDataStore.PATH, ref => ref.where('order_date', '==', todayStr)).valueChanges()
   }
 }

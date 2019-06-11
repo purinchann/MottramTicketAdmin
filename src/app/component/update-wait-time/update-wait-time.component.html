@@ -1,0 +1,26 @@
+<div>
+  <h3>現在のモッチャム待ち時間を更新</h3>
+  <mat-drawer-container class="example-container">
+      <mat-drawer mode="side" opened>
+        <table>
+            <tr><span class="menu-button"></span></tr>
+            <tr><span class="menu-button"><a routerLink="/dashboard"><button mat-flat-button color="basic">ダッシュボード</button></a></span></tr>
+            <tr><span class="menu-button"><a routerLink="/send-custom-message"><button mat-flat-button color="basic">メッセージ送信</button></a></span></tr>
+            <tr><span class="menu-button"><a routerLink="/update-wait-time"><button mat-flat-button color="basic">待ち時間更新</button></a></span></tr>
+            <tr><span class="menu-button"><a routerLink="/search-purchased-order"><button mat-flat-button color="basic">担当したユーザIDで注文検索</button></a></span></tr>
+        </table>
+      </mat-drawer>
+      <mat-drawer-content>
+          <div>
+              <mat-form-field appearance="outline" class="row" [formGroup]="timeForm">
+                  <mat-label>モッチャム待ち時間を更新</mat-label>
+                  <input matInput class="input" formControlName="time" placeholder="例) 60" required>
+              </mat-form-field>
+              <button mat-raised-button color="primary" (click)='updateWaitTime()'>更新</button>
+          </div>
+          <div>
+              <p>※ 分単位の数字で入力すること!</p>
+          </div>
+      </mat-drawer-content>
+  </mat-drawer-container>
+</div>

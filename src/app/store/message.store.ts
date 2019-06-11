@@ -13,6 +13,22 @@ export class MessageDataStore {
     private api: ApiService
   ) {}
 
+  add(params: {[key: string]: any}): Promise<boolean> {
+    return this.api.afs.collection(MessageDataStore.PATH).add(params)
+    .then(docRef => {
+        const id = docRef.id;
+        return docRef.update({'id': id}).then(res2 => {
+            return true
+        }).catch(error => {
+            return false
+        })
+    })
+    .catch(error => {
+        console.log(error)
+        return false
+    })
+  }
+
   whereByUserId(uid: string): Observable<Message[]> {
       return this.api.afs.collection<Message>(MessageDataStore.PATH, ref => ref.where('user_id', '==', uid)).valueChanges()
   }

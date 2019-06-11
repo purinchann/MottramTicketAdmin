@@ -29,5 +29,6 @@ export class UpdateWaitTimeComponent implements OnInit {
     const waitTimeStr = this.timeForm.get('time').value as string;
     const waitTime = Number(waitTimeStr);
     this.shopDataStore.update('Bhgou5g11hYztxeX2JFz', {'current_wait_time': waitTime})
+    this.timeForm.setValue({'time': ''})
   }
 }

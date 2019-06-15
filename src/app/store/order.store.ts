@@ -35,4 +35,12 @@ export class OrderDataStore {
   whereByToday(todayStr: string): Observable<Order[]> {
     return this.api.afs.collection<Order>(OrderDataStore.PATH, ref => ref.where('order_date', '==', todayStr)).valueChanges()
   }
+
+  update(id: string, params: {[key: string]: any}): Promise<boolean> {
+    return this.api.afs.doc(OrderDataStore.PATH+`/${id}`).update(params).then(() => {
+        return true
+    }).catch(err => {
+        return false
+    })
+  }
 }

@@ -46,6 +46,7 @@
                             <th class="th">UserID</th>
                             <th class="th">注文時刻</th>
                             <th></th>
+                            <th></th>
                           </tr>
                       </thead>
                       <tbody>
@@ -57,6 +58,9 @@
                             <td [ngClass]="{lightGray: i % 2 == 0}" class="td">{{ convertDateFormat(order.updated_at) }}</td>
                             <td>
                               <button mat-raised-button color="primary" (click)='sendTenMinutesAgoMessage(order.user_id)'>10分前通知送信</button>
+                            </td>
+                            <td>
+                              <button mat-raised-button color="primary" (click)='updateMakingOrder(order.id)'>注文ステータス更新</button>
                             </td>
                           </tr>
                       </tbody>

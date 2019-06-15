@@ -88,4 +88,19 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  updateMakingOrder(orderId: string) {
+    const userId = this.auth.currentUserId()
+    const timestamp = moment().unix()*1000;
+    const params = {
+        'is_make': true,
+        'updated_at': timestamp,
+        'buyerId': userId
+    }
+    this.orderDataStore.update(orderId,params).then(res => {
+      if (res) {
+        location.reload();
+      }
+    })
+  }
+
 }
